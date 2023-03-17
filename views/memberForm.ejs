@@ -1,0 +1,43 @@
+<%- include('./partials/head.ejs') %>
+
+<fieldset>
+  <legend>Voeg een nieuwe member toe</legend>
+  <form action="/member" method="post">
+    <input type="hidden" name="id" id="id" value="<%= id %>">
+    <input type="hidden" name="squad" value="<%= squad %>" />
+
+    <label for="slug">slug:</label>
+		<input type="text" name="slug" id="slug" placeholder="..." value="<%= slug %>" />
+
+		<label for="name">name:</label>
+		<input type="text" name="name" id="name" placeholder="..." value="<%= name %>" />
+
+		<label for="prefix">prefix:</label>
+		<input type="text" name="prefix" id="prefix" placeholder="..." value="<%= prefix %>" />
+
+		<label for="surname">surname:</label>
+		<input type="text" name="surname" id="surname" placeholder="..." value="<%= surname %>" />
+
+		<label for="nickname">nickname:</label>
+		<input type="text" name="nickname" id="nickname" placeholder="..." value="<%= nickname %>" />
+
+		<label for="avatar">avatar:</label>
+		<input type="text" name="avatar" id="avatar" placeholder="..." value="<%= avatar %>" />
+
+		<label for="gitHubHandle">gitHubHandle:</label>
+		<input type="text" name="gitHubHandle" id="gitHubHandle" placeholder="..." value="<%= gitHubHandle %>" />
+
+		<label for="website">website:</label>
+		<input type="text" name="website" id="website" placeholder="..." value="<%= website %>" />
+
+		<label for="colour">colour:</label>
+		<input type="color" name="colour" id="colour" placeholder="..." value="<%= colour %>" />
+
+		<label for="bio">bio:</label>
+		<textarea name="bio" id="bio" cols="30" rows="10" placeholder="..."><%= bio %></textarea>
+		<input type="submit" value="Opslaan" />
+
+  </form>
+</fieldset>
+
+<%- include('./partials/foot.ejs') %>
