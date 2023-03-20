@@ -21,17 +21,6 @@ member.get('/', (request, response) => {
 // Toon het formulier om een nieuwe member aan te maken
 member.get('/new', (request, response) => {
   const data = {
-    id: null,
-    slug: null,
-    name: null,
-    prefix: null,
-    surname: null,
-    nickname: null,
-    avatar: null,
-    gitHubHandle: null,
-    website: null,
-    colour: null,
-    bio: null,
     squad: request.query.squad || null,
   }
   response.render('memberForm.ejs', data)
@@ -39,12 +28,23 @@ member.get('/new', (request, response) => {
 
 // Handel het versturen van het formulier af
 member.post('/', (request, response) => {
+  console.log(request.body)
   // Roep de API aan met de post methode
   const url = `${process.env.API_URL}/member`
   postJson(url, request.body).then((data) => {
+    // De waarden uit het formulier (niet de API)
     let newMember = { ...request.body }
-    newMember.id = data.data.createMember.id
-    response.render('memberForm.ejs', newMember)
+    // Het id uit de API (overschrijft het formulier)
+    newMember.id = data.data.createMember.id || null
+
+    // Stuur de gebruiker naar / als het gelukt is
+    if (data.success) {
+      response.redirect('/?memberPosted=true') // squad meegeven, message meegeven
+
+      // Toon opnieuw het formulier (met waarden) als het niet gelukt is
+    } else {
+      response.render('memberForm.ejs', newMember) // Fail, message meegeven
+    }
   })
 })
 
