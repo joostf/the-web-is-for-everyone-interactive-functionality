@@ -6,4 +6,35 @@
   <p><%- member.bio.html %></p>
 </section>
 
+
+
+<section>
+  <h2>Shouts</h2>
+
+  <% member.shouts.forEach(shout => { %>
+
+    <article>
+      <h2><%= shout.author %></h2>
+      <p><%= shout.text %></p>
+    </article>
+  
+  <% }) %>
+  
+</section>
+
+<form action="/shout" method="post" class="form-shout">
+  <h2>Shout @<%= member.name %></h2>
+  <input type="hidden" name="id" id="id" value="<%= member.id %>">
+  <label for="author">Naam</label>
+  <input id="author" type="text" name="author">
+
+  <label for="text">Bericht</label>
+  <input id="text" type="text" name="text">
+
+  <button>🔥</button>
+
+  <input type="submit" value="Shout!">
+</form>
+
+
 <%- include('./partials/foot.ejs') %>

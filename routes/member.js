@@ -28,12 +28,10 @@ member.get('/new', (request, response) => {
 
 // Handel het versturen van het formulier af
 member.post('/', (request, response) => {
-  console.log(request.body)
   // Roep de API aan met de post methode
   const url = `${process.env.API_URL}/member`
+
   postJson(url, request.body).then((data) => {
-    // De waarden uit het formulier (niet de API)
-    let newMember = { ...request.body }
     // Het id uit de API (overschrijft het formulier)
     newMember.id = data.data.createMember.id || null
 

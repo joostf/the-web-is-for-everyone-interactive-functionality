@@ -17,12 +17,20 @@ body {
   font-weight: 200;
   background: var(--color-almond);
   color: black;
+  padding:1rem  1rem 6rem;
 }
-
+nav ul {
+  display:flex;
+  list-style:none;
+  gap:1rem
+}
+a {
+  color:#000
+}
 main {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   gap: 1rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -32,6 +40,12 @@ main > h1 {
   flex-basis: 100%;
 }
 
+section {
+  max-width:30em
+}
+img {
+  max-width:100%;
+}
 article {
   position: relative;
   transition: 0.5s;
@@ -41,7 +55,14 @@ article {
   height: 5rem;
   border-radius: 1rem;
   background: var(--color-green);
+  margin:.5rem 0;
+  transition:.15s
 }
+article:hover {
+  transform:scale(1.05)
+}
+
+
 article:last-of-type {
   background: var(--color-purple);
 }
@@ -70,12 +91,22 @@ article a {
 article:has(a:hover) {
   transform: scale(1.2);
 }
+section > article {
+  flex-direction: column;
+  justify-content: flex-start;
+  height:auto;
+}
+section > article h2,
+section > article p {
+  height:auto;
+  margin:0;
+  padding:.5rem
+}
 
 footer > p > span {
   display: inline-block;
   transform: rotate(180deg);
 }
-
 fieldset {
   padding: 1rem;
 }
@@ -83,7 +114,6 @@ fieldset {
 label {
   margin: 1rem 0 0.2rem;
   display: block;
-  font-size: 1.6rem;
 }
 select,
 textarea,
@@ -92,11 +122,13 @@ input[type='submit'] {
   font-family: monospace;
   padding: var(--component-padding);
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 1.3em;
   background-color: #fff4;
   border: 1px solid currentColor;
   border-radius: var(--rounded);
   color: var(--c-blue);
+  transition:.1s;
+  padding:.25rem
 }
 textarea {
   height: 8em;
@@ -104,17 +136,23 @@ textarea {
 textarea:focus,
 input[type='text']:focus {
   outline: none !important;
-  box-shadow: 0 0 10px var(--c-blue);
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  transform: scale(1.05);
+
 }
 input[type='text'] {
   height: 1.6em;
 }
 input[type='submit'] {
   margin-top: 1rem;
-  background: var(--c-blue);
-  color: var(--c-green);
+  background: #000;
+  color: #fff;
   border-radius: var(--pilled);
   transition: 0.25s;
+  border-radius:1rem;
+  padding:.25rem 0;
+  justify-self: center;
+  
 }
 input[type='submit']:hover {
   transform: scale(1.05);
@@ -123,4 +161,39 @@ input[type='submit']:focus {
   transform: scale(1.05);
   background: var(--c-green);
   color: var(--c-blue);
+  outline:none;
+  
+}
+form button {
+  opacity:0;
+  border-radius:50%;
+  padding:.25rem;
+  text-align: center;
+  margin-top: .25rem;
+  transition:.25s;
+  width:10rem;
+
+}
+form button:hover,
+form button:focus {
+  transform:scale(1.25);
+  
+}
+
+body.js-enabled form button {
+  opacity:1;
+  all:unset;
+  
+
+}
+
+footer {
+  position:fixed;
+  bottom:0;
+  left:0;
+  z-index: 1000;
+}
+footer p {
+  background-color: var(--color-almond);
+  padding:1rem;
 }
