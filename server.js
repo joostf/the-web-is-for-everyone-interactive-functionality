@@ -48,7 +48,7 @@ server.get('/member', (request, response) => {
   })
 })
 
-server.post('/shout', (request, response) => {
+server.post('/shout', (request, response) => {t
   const url = `${process.env.API_URL}/shout`
 
   postJson(url, request.body).then((data) => {
