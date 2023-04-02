@@ -1,9 +1,6 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
-import indexRoute from './routes/index.js'
-import memberRoute from './routes/member.js'
-import shoutRoute from './routes/shout.js'
-import { postJson } from './helpers/fetchWrapper.js'
+import { fetchJson, postJson } from './helpers/fetchWrapper.js'
 
 // expose env variables
 dotenv.config()
@@ -25,20 +22,39 @@ server.use(express.static('public'))
 server.use(express.json()) 
 server.use(express.urlencoded({ extended: true }))
 
-// Stel de routes in
-server.use('/', indexRoute)
-server.use('/member', memberRoute)
-// server.use('/shout', shoutRoute)
+server.get('/', (request, response) => {
+  const url = `${process.env.API_URL}/squads/`
 
-server.post('/shout', (request, response) => { // http://localhost:8000/shout
+  fetchJson(url).then((data) => {
+    response.render('index', data)
+  })
+})
+
+server.get('/squad', (request, response) => {
+  const id = request.query.id || null
+  const url = `${process.env.API_URL}/squad/?id=${id}`
+
+  fetchJson(url).then((data) => {
+      response.render('squad', data)
+  })
+})
+
+server.get('/member', (request, response) => {
+  const id = request.query.id || null
+  const url = `${process.env.API_URL}/member/?id=${id}`
+  
+  fetchJson(url).then((data) => {
+    response.render('member', data)
+  })
+})
+
+server.post('/shout', (request, response) => {
   const url = `${process.env.API_URL}/shout`
 
   postJson(url, request.body).then((data) => {
-    console.log('body', request.body)
-
     if (data.message == 'Succes') {
       response.redirect(`/member/?id=${data.id}&shoutPosted=true`)
-      console.log('data from api', data)
+
     } else {
       response.redirect(`/member/?id=${data.id}&shoutPosted=false`)
     }

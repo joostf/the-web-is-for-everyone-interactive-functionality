@@ -9,8 +9,6 @@ shout.post('/', (request, response) => { // http://localhost:8000/shout
 
   postJson(url, request.body).then((data) => {
 
-    console.log(request.body)
-
     if (data.message == 'Succes') {
       response.redirect('/member/?id=cldcsnrpc0z9w0auooju1uj1g&shoutPosted=true')
 
@@ -20,6 +18,6 @@ shout.post('/', (request, response) => { // http://localhost:8000/shout
   })
 })
 
-shout.get(/)
-
 export default shout
+
+
